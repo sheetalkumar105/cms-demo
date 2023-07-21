@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { DatabaseModule } from '@cms-demo/database';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { resolve } from 'path';
+import { JwtModule } from '../jwt/jwt.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -9,7 +11,9 @@ import { resolve } from 'path';
       isGlobal: true,
       envFilePath: resolve(__dirname, "../.env"),
     }),
-    DatabaseModule
+    DatabaseModule,
+    JwtModule,
+    AuthModule
   ],
   providers: [ConfigService],
 })

@@ -2,6 +2,12 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigService } from '@config';
 import { User } from '@models/user.model';
+import { UserRole } from '@models/user-role.model';
+import { City } from '@models/city.model';
+import { Profile } from '@models/profile.model';
+import { State } from '@models/state.model';
+import { Otp } from '@models/otp.model';
+import { File } from '@models/file.model';
 
 @Module({
   imports: [
@@ -17,7 +23,7 @@ import { User } from '@models/user.model';
           database: config.get('PG_DATABASE') || 'demo',
           autoLoadModels: true,
           models: [
-            User
+            User,UserRole,City,File,Profile,State, Otp
           ],
           define: {
             timestamp: true,

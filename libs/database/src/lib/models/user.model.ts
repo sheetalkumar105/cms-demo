@@ -1,24 +1,24 @@
 import {
   Column,
-  Model,
   Table,
   DataType,
-  IsEmail
+  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
+import { BaseModel } from './base.model';
+import { UserRole } from './user-role.model';
 
 
-
-@Table
-export class User extends Model {
+@Table({tableName:'users'})
+export class User extends BaseModel {
   
+  @Column({type:DataType.STRING,field:'first_name'})
+  firstName: string;
 
-  @Column(DataType.STRING)
-  first_name: string;
+  @Column({type:DataType.STRING,field:'last_name'})
+  lastName: string;
 
-  @Column(DataType.STRING)
-  last_name: string;
-
-  @IsEmail
+  // @IsEmail
   @Column(DataType.STRING)
   email: string;
 
@@ -30,4 +30,12 @@ export class User extends Model {
   })
   password: string;
 
+  @ForeignKey(() => UserRole)
+  @Column({type:DataType.INTEGER,field:'role_id'})
+  roleId: number;
+
+  @BelongsTo(() => UserRole)
+  role: UserRole;
+
 }
+
